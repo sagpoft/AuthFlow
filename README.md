@@ -1,11 +1,10 @@
 # AuthFlow
 
-Authentication system built with Python and Flask, focused on secure user authentication and access control.
-  Status
+Sistema de autenticação desenvolvido com Python e Flask, focado na autenticação segura de usuários e no controle de acesso.
 
-**Status: In Development** — Em desenvolvimento.
+**Status: Em desenvolvimento**
 
-## Technologies
+## Tecnologias
 
 * Python
 * Flask
@@ -13,31 +12,30 @@ Authentication system built with Python and Flask, focused on secure user authen
 * CSS
 * SQLite
 
-## Features
+## Funcionalidades
 
-* User registration
-* Secure password hashing
-* User authentication
-* Login attempt tracking
-* Failed login attempt limit
-* Account lockout
-* Password recovery via email
-* Login history
+* Cadastro de usuários
+* Hashing senhas
+* Autenticação de usuários
+* Limite de tentativas de login malsucedidas
+* Bloqueio de conta
+* Recuperação de senha por e-mail
+* Histórico de login
 
-## Purpose
+## Objetivo
 
-This project was created to practice web development and cybersecurity concepts, with a focus on authentication, password security, access control, and user activity monitoring.
+Este projeto foi criado para praticar conceitos de desenvolvimento web e cyber segurança, com foco em autenticação, segurança de senhas, controle de acesso e monitoramento de atividades do usuário.
 
-## Security
+## Segurança
 
-The project focuses on implementing authentication and security practices such as password hashing, login attempt control, account lockout, and password recovery.
+O projeto concentra-se na implementação de práticas de autenticação e segurança, como hashing de senhas, controle de tentativas de login, bloqueio de conta e recuperação de senha.
 
-## Learning Goals
+## Objetivos de Aprendizado
 
-* Practice Python and Flask
-* Understand user authentication
-* Learn password security
-* Work with databases
-* Understand session management
-* Practice Git and GitHub
-* Apply basic web security concepts
+* Praticar Python e Flask
+* Compreender a autenticação de usuários
+* Aprender sobre segurança de senhas
+* Trabalhar com bancos de dados
+* Compreender o gerenciamento de sessões
+* Praticar o uso de Git e GitHub
+* Aplicar conceitos básicos de segurança web
