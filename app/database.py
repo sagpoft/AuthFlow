@@ -14,6 +14,15 @@ def criar_banco():
             password TEXT NOT NULL
         )
     """)
-
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS login_attempts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            username TEXT NOT NULL,
+            result TEXT NOT NULL,
+            date_time TEXT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES usuarios(id)
+        )
+    """)
     conexao.commit()
     conexao.close()

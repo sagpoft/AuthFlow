@@ -1,8 +1,10 @@
-from flask import app, render_template, request, redirect, url_for
+from flask import app, render_template, request, redirect, url_for, session
 
 import sqlite3
 
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from app.monitoring import log_login_attempt, get_login_history
 
 
 def register_routes(app):
@@ -36,17 +38,39 @@ def register_routes(app):
             # Verifica se o usuário existe e se a senha está correta
             if usuario:
                 if check_password_hash(usuario[2], password):
-                    return render_template('user.html', username=username)
+                   log_login_attempt(
+                        usuario[0],
+                        usuario[1],
+                        "Success"
+                   )
+                   session["user_id"] = usuario[0]
+                   session["username"] = usuario[1]
+
+                   return redirect(url_for("usuarios"))
+                
                 else:
-                    return render_template(
+                     
+                     log_login_attempt(
+                        usuario[0],
+                        usuario[1],
+                        "Failure"
+                     )
+                    
+                     return render_template(
                         'login.html',
                         error="Usuário ou senha incorretos."
-                    )
+                     )
             else:
-                return render_template(
+                
+                 log_login_attempt(
+                    None,
+                    username,
+                    "Failure"
+                 )
+                 return render_template(
                     'login.html',
                     error="Usuário ou senha incorretos."
-                )
+                 )
 
         # Quando a página é acessada pelo navegador (GET)
         return render_template(
@@ -54,14 +78,24 @@ def register_routes(app):
             success=request.args.get("registered")
         )
 
-    # Rota do perfil
-    @app.route('/usuarios', methods=["GET", "POST"])
+    # Rota do usuario
+    @app.route('/usuarios')
     def usuarios():
+
+        if "user_id" not in session:
+            return redirect(url_for("login"))
+        
+        tentativas = get_login_history(session["user_id"])
         return render_template(
             'user.html',
-            username=request.form.get("username")
+            username=session.get("username"),
+            tentativas=tentativas
         )
-
+    # Rota de logout
+    @app.route('/logout')
+    def logout():
+        session.clear()
+        return redirect(url_for("login"))
     # Rota de registro
     @app.route('/registrar', methods=["GET", "POST"])
     def registrar():

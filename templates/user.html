@@ -13,6 +13,38 @@
     <h1>Bem-vindo ao seu perfil, {{ username }}!</h1>
 
     <p>Este é o seu perfil de usuário. Aqui você pode ver suas informações e gerenciar sua conta.</p>
+    
+    <h2>Histórico de login</h2>
+
+    {% if tentativas %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Data e hora</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for tentativa in tentativas %}
+                    <tr>
+                        <td>{{ tentativa[0] }}</td>
+                        <td>{{ tentativa[1] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <p>Nenhuma tentativa de login registrada.</p>
+
+    {% endif %}
+    
+    <a href="{{ url_for('logout') }}">
+    <button type="button">Sair</button>
+</a>
 
 
 </body>
